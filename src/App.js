@@ -17,8 +17,13 @@ export default function App() {
       console.log(val)
       setTyping(true);
 
-      let baseurl = "http://192.168.2.200:8080/text/text-curie-001";
-     axios.get(baseurl, {msg: '11111'}).then(res=>{
+      let myaxios = axios.create({
+        // 发送默认请求到本机的8280端口!!
+        baseURL:"http://192.168.2.200:8080",
+        timeout:10000
+      });
+      let baseurl = "/text/text-curie-001";
+     myaxios.get(baseurl, {msg: '11111'}).then(res=>{
        appendMsg({
          type: "text",
          content: { text: res }
