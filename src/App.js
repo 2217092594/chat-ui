@@ -1,6 +1,7 @@
 import React from "react";
 import Chat, { Bubble, useMessages } from "@chatui/core";
 import "@chatui/core/dist/index.css";
+import axios from 'axios'
 
 export default function App() {
   const { messages, appendMsg, setTyping } = useMessages([]);
@@ -12,15 +13,24 @@ export default function App() {
         content: { text: val },
         position: "right"
       });
-
+      console.log(type)
+      console.log(val)
       setTyping(true);
 
-      setTimeout(() => {
-        appendMsg({
-          type: "text",
-          content: { text: "Bala bala" }
-        });
-      }, 1000);
+      let baseurl = "http://192.168.2.200:8080/text/text-curie-001";
+     axios.get(baseurl, {msg: '11111'}).then(res=>{
+       appendMsg({
+         type: "text",
+         content: { text: res }
+       });
+      })
+
+      // setTimeout(() => {
+      //   appendMsg({
+      //     type: "text",
+      //     content: { text: "Bala bala" }
+      //   });
+      // }, 1000);
     }
   }
 
@@ -31,7 +41,7 @@ export default function App() {
 
   return (
     <Chat
-      navbar={{ title: "智能助理" }}
+      navbar={{ title: "ChatGPT" }}
       messages={messages}
       renderMessageContent={renderMessageContent}
       onSend={handleSend}
