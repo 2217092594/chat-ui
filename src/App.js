@@ -17,18 +17,20 @@ export default function App() {
       console.log(val)
       setTyping(true);
 
-      let myaxios = axios.create({
-        // 发送默认请求到本机的8280端口!!
-        baseURL:"http://192.168.2.200:8080",
-        timeout:10000
-      });
-      let baseurl = "/text/text-curie-001";
-     myaxios.get(baseurl, {msg: '11111'}).then(res=>{
+     axios.get("/api/text/text-curie-001", {params:{
+       msg:val
+       }}).then((res)=>{
+       console.log(res)
        appendMsg({
          type: "text",
-         content: { text: res }
+         content: { text: res.data }
        });
-      })
+      }).catch(
+         (e)=>{
+           console.log(e)
+         }
+
+     )
 
       // setTimeout(() => {
       //   appendMsg({
