@@ -3,9 +3,14 @@ import Chat, { Bubble, useMessages } from "@chatui/core";
 import "@chatui/core/dist/index.css";
 import axios from 'axios'
 
+class App extends React.Component {
+  constructor() {
+    super();
+  }
+}
 export default function App() {
-  const { messages, appendMsg, setTyping } = useMessages([]);
 
+  const { messages, appendMsg, setTyping } = useMessages([]);
   function handleSend(type, val) {
     if (type === "text" && val.trim()) {
       appendMsg({
